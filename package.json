@@ -1,5 +1,5 @@
 {
-  "name": "IYFG-API",
+  "name": "IYFG_API",
   "version": "0.1.1",
   "scripts": {
     "start": "nodemon ./bin/www"
