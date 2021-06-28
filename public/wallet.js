@@ -2,7 +2,6 @@ const walletDB = require('./walletDB.js')
 const connect = require('./connection.js')
 const web3 = connect.networkConnection(); 
 const jwt = require('jsonwebtoken');
-const {createHmac} = require('crypto');
 
 module.exports = {
 
@@ -71,7 +70,11 @@ module.exports = {
         // console.log("jwttoken: " + jwttoken)
          let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['HS256'] });
         let wallet = await walletDB.checkUserWallet(decoded.uid);
+        if(wallet == null) {
+          callback({"msg": "Wallet account not found!"})
+      }else{
           callback(await walletDB.decryptWallet(wallet.KeyStore, decoded.email, decoded.uid));
+      }
         }catch(e){
             console.log(e);
             callback(e.toString())

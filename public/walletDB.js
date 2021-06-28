@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017";
+const url = "mongodb://uzgfvoglju85cmy60xoc:T5K1kVO4ddlBzwkjkRmQ@b92wmhgrgcbhxuw-mongodb.services.clever-cloud.com:27017/b92wmhgrgcbhxuw";
 var dbo;
 const web3 = require('./connection.js').networkConnection(); 
 const {createHmac} = require('crypto');
@@ -9,7 +9,7 @@ module.exports = {
     insertWalletData: function(wallet,callback){
     MongoClient.connect(url,{useUnifiedTopology: true}, function(err, client) {
     if(err) throw err;
-    dbo = client.db("WalletDB");
+    dbo = client.db("b92wmhgrgcbhxuw");
     dbo.collection("wallets").insertOne(wallet, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
@@ -20,7 +20,7 @@ module.exports = {
     checkUserWallet:async function(id){
 
     let client = await MongoClient.connect(url,{useUnifiedTopology: true},{useNewUrlParser: true});
-     var dbo = client.db("WalletDB");
+     var dbo = client.db("b92wmhgrgcbhxuw");
      let collection =  dbo.collection("wallets");
      let result = await collection.findOne({userId:id});
      return result;
