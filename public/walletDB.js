@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://uzgfvoglju85cmy60xoc:T5K1kVO4ddlBzwkjkRmQ@b92wmhgrgcbhxuw-mongodb.services.clever-cloud.com:27017/b92wmhgrgcbhxuw";
+const url = process.env.MONGODB_ADDON_URI;
 var dbo;
 const web3 = require('./connection.js').networkConnection(); 
 const {createHmac} = require('crypto');

@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const iyfg = require('../public/IYFG_token.js');
-const walletDB = require('../public/walletDB.js')
-const jwt = require('jsonwebtoken');
 
 router.get('/', async function(req, res, next) {
   try{
