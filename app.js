@@ -15,8 +15,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+
+  res.send("<h1> IYFG APIs server is Running <br/> Now You can call APIs from your any client.</h1>");
+})
+
 app.use('/api/token', tokenRouter);
 app.use('/api/wallet', walletRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
