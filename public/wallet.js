@@ -68,6 +68,7 @@ module.exports = {
         //         email: "asad926@gmail.com"
         //       }, process.env.SECRET_KEY, {algorithm: 'HS256' ,expiresIn: '24h' });
         // console.log("jwttoken: " + jwttoken)
+        console.log("Secret Key: " + process.env.SECRET_KEY)
          let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256'] });
           console.log("decoded: " + JSON.stringify(decoded))
          let wallet = await walletDB.checkUserWallet(decoded.uid);
