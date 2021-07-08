@@ -7,7 +7,7 @@ module.exports = {
 
     getWalletAddress: async function(token, callback) {
         try {
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
+            let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
             let wallet = await walletDB.checkUserWallet(decoded.uid)
 
        if(wallet == null){
@@ -24,7 +24,7 @@ module.exports = {
 
     createAccount: async function(token, callback) {
       try{
-       let decoded = jwt.verify(token, process.env.SECRET_KEY);
+       let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
        let wallet = await walletDB.checkUserWallet(decoded.uid)
        if(wallet != null) {
            callback({"msg": "User Already Have Wallet Created!!"})
@@ -68,8 +68,9 @@ module.exports = {
         //         email: "asad926@gmail.com"
         //       }, process.env.SECRET_KEY, {algorithm: 'HS256' ,expiresIn: '24h' });
         // console.log("jwttoken: " + jwttoken)
-         let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['HS256'] });
-        let wallet = await walletDB.checkUserWallet(decoded.uid);
+         let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256'] });
+          console.log("decoded: " + JSON.stringify(decoded))
+         let wallet = await walletDB.checkUserWallet(decoded.uid);
         if(wallet == null) {
           callback({"msg": "Wallet account not found!"})
       }else{
@@ -83,7 +84,7 @@ module.exports = {
 
         userBalance: async function(token,callback) {
             try{
-                let decoded = jwt.verify(token, process.env.SECRET_KEY);
+                let decoded = jwt.verify(token, process.env.SECRET_KEY,{ algorithms: ['RS256']});
                 let wallet = await walletDB.checkUserWallet(decoded.uid)
                 let bal = await web3.eth.getBalance(wallet.account)
                 let ethBal = web3.utils.fromWei(bal, 'ether');

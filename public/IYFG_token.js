@@ -10,7 +10,7 @@ module.exports = {
 
     getTokenDetails: async function(token, callback) {
         try{
-         let decoded = jwt.verify(token, process.env.SECRET_KEY);
+         let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
          let wallet = await walletDB.checkUserWallet(decoded.uid);
          if(wallet == null) throw new Error("User did't have a wallet account created!");
          let account = wallet.account;
@@ -32,7 +32,7 @@ module.exports = {
 
 getBalance: async function(token,address, callback) {
     try{
-     let decoded = jwt.verify(token, process.env.SECRET_KEY);
+     let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
      let wallet = await walletDB.checkUserWallet(decoded.uid);
      if(wallet == null) throw new Error("User did't have a wallet account created!");
      let account = wallet.account;
@@ -54,7 +54,7 @@ getBalance: async function(token,address, callback) {
 
   getAllowance: async function(token ,owner,spender, callback) {
     try{
-        let decoded = jwt.verify(token, process.env.SECRET_KEY);
+        let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
         let wallet = await walletDB.checkUserWallet(decoded.uid);
         if(wallet == null) throw new Error("User did't have a wallet account created!");
         let account = wallet.account;
@@ -75,7 +75,7 @@ getBalance: async function(token,address, callback) {
 
         try{
            let amounts = web3.utils.toWei(amount,"ether");
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
+            let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
             let wallet = await walletDB.checkUserWallet(decoded.uid);
             if(wallet == null) throw new Error("User did't have a wallet account created!");
             let account = wallet.account;
@@ -112,7 +112,7 @@ getBalance: async function(token,address, callback) {
 
         try{
             let amounts = web3.utils.toWei(amount,"ether");
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
+            let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
             let wallet = await walletDB.checkUserWallet(decoded.uid);
             if(wallet == null) throw new Error("User did't have a wallet account created!");
             let account = wallet.account;
@@ -149,7 +149,7 @@ getBalance: async function(token,address, callback) {
 
         try{
             let amounts = web3.utils.toWei(amount,"ether");
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
+            let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
             let wallet = await walletDB.checkUserWallet(decoded.uid);
             if(wallet == null) throw new Error("User did't have a wallet account created!");
             let account = wallet.account;
@@ -187,7 +187,7 @@ getBalance: async function(token,address, callback) {
 
         try{
             let amounts = web3.utils.toWei(amount,"ether");
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
+            let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
             let wallet = await walletDB.checkUserWallet(decoded.uid);
             if(wallet == null) throw new Error("User did't have a wallet account created!");
             let account = wallet.account;
@@ -224,7 +224,7 @@ getBalance: async function(token,address, callback) {
     decreaseTokenAllowance: async function(token,spender, amount, callback) {
         try{
             let amounts = web3.utils.toWei(amount,"ether");
-            let decoded = jwt.verify(token, process.env.SECRET_KEY);
+            let decoded = jwt.verify(token, process.env.SECRET_KEY, { algorithms: ['RS256']});
             let wallet = await walletDB.checkUserWallet(decoded.uid);
             if(wallet == null) throw new Error("User did't have a wallet account created!");
             let account = wallet.account;
